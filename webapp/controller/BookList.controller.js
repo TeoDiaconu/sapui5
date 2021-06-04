@@ -27,13 +27,24 @@ sap.ui.define([
         
         //add button pressed to open fragment
         onAdd : function () {
+            
+            var oView = this.getView();
 
-            if (!this.addDialog) {
-                this.newBookDialog = sap.ui.xmlfragment("org.ubb.books.view.AddDialog", this);
-            }
-
-            this.getView().addDependent(this.newBookDialog);
-            this.newBookDialog.open();
+			// create dialog lazily
+			if (!this.pDialog) {
+				this.pDialog = Fragment.load({
+					id: oView.getId(),
+					name: "org.ubb.books.view.AddDialog",
+					controller: this
+				}).then(function (oDialog) {
+					// connect dialog to the root view of this component (models, lifecycle)
+					oView.addDependent(oDialog);
+					return oDialog;
+				});
+			} 
+			this.pDialog.then(function(oDialog) {
+				oDialog.open();
+			});
         },
 
         //save button on fragment 
@@ -144,13 +155,23 @@ sap.ui.define([
     
         onUpdate : function () {
 
-            if (!this.updateDialog) {
-                this.newBookDialog = sap.ui.xmlfragment("org.ubb.books.view.UpdateDialog", this);
-            }
+            var oView = this.getView();
 
-            this.getView().addDependent(this.newBookDialog);
-            this.newBookDialog.open();
-
+			// create dialog lazily
+			if (!this.pDialog) {
+				this.pDialog = Fragment.load({
+					id: oView.getId(),
+					name: "org.ubb.books.view.UpdateDialog",
+					controller: this
+				}).then(function (oDialog) {
+					// connect dialog to the root view of this component (models, lifecycle)
+					oView.addDependent(oDialog);
+					return oDialog;
+				});
+			} 
+			this.pDialog.then(function(oDialog) {
+				oDialog.open();
+			});
         },
 
 
@@ -280,6 +301,13 @@ sap.ui.define([
         closeBorrowedDialog: function () {
             this.byId("openDialog").close();
         },
+
+        closeAddDialog: function () {
+            this.byId("addDialog").close();
+        },
+        closeUpdateDialog: function () {
+            this.byId("updateDialog").close();
+        }
 
     });
 });

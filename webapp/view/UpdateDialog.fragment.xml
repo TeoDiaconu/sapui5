@@ -11,6 +11,14 @@
       draggable = "true"
       resizable = "true">
 
+			<Button
+					id="cancelUpdate"
+					text="cancel"
+					press=".closeUpdateDialog"
+					class="myAppDemoWT myCustomButton"
+					width="30%"
+					type="Negative"/>
+
         <f:SimpleForm id="updateBookForm" maxContainerCols="2" editable="true" layout="ResponsiveGridLayout" labelSpanL="2" labelSpanM="2"
 			emptySpanL="0" emptySpanM="0" columnsL="1" columnsM="1" class="editableForm sapUiSizeCompact">
 
