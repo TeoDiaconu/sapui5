@@ -267,7 +267,7 @@ sap.ui.define([
         onShow : function () {
 
             if (!this.openDialog) {
-                this.showBorrowedDialog = sap.ui.xmlfragment("org.ubb.books.view.openDialog", this);
+                this.showBorrowedDialog = sap.ui.xmlfragment("org.ubb.books.view.BorrowedBooks", this);
             }
 
             this.getView().addDependent(this.showBorrowedDialog);
@@ -275,11 +275,11 @@ sap.ui.define([
 
         },
 
-        // closeAddDialog: function () {
-        //     if (!this.addDialog) {
-        //         this.addDialog = sap.ui.xmlfragment("org.ubb.books.view.addDialog", this);
+        // closeBorrowedDialog: function () {
+        //     if (!this.showDialog) {
+        //         this.showDialog = sap.ui.xmlfragment("org.ubb.books.view.BorrowedBooks", this);
         //     }
-        //     this.addDialog.close();
+        //     this.showDialog.destroy();
         // },
 
         // closeUpdateDialog: function () {

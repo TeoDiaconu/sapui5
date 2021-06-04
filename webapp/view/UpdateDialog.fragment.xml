@@ -11,10 +11,6 @@
       draggable = "true"
       resizable = "true">
 
-		<buttons>
-    		<Button text="Cancel" press=".closeUpdateDialog"/>
-		</buttons>
-
 
         <f:SimpleForm id="updateBookForm" maxContainerCols="2" editable="true" layout="ResponsiveGridLayout" labelSpanL="2" labelSpanM="2"
 			emptySpanL="0" emptySpanM="0" columnsL="1" columnsM="1" class="editableForm sapUiSizeCompact">

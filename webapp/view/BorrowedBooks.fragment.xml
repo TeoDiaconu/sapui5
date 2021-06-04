@@ -16,11 +16,16 @@ xmlns:ui="sap.ui" xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core
 		<headerToolbar> 
 			<Toolbar>
 				<content>
-				<Button text="Cancel" press=".closeDialog"/>
+				<Button
+						id="cancelBorrowed"
+						text="cancel"
+						press=".closeBorrowedDialog"
+						class="myAppDemoWT myCustomButton"
+						width="13%"
+						type="Negative"/>
 				</content>
 			</Toolbar>
 		</headerToolbar>
-
 	
 		<columns>
 			<Column>
@@ -76,8 +81,5 @@ xmlns:ui="sap.ui" xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core
 		</items>
 	</Table>
    
-<buttons>
-    <Button text="Cancel" press=".closeDialog"/>
-</buttons>
 </Dialog>
 </core:FragmentDefinition>
