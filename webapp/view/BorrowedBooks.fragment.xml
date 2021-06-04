@@ -20,7 +20,7 @@ xmlns:ui="sap.ui" xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core
 						text="close"
 						press=".closeBorrowedDialog"
 						class="myAppDemoWT myCustomButton"
-						width="13%"
+						width="7%"
 						type="Negative"/>
 				</content>
 			</Toolbar>

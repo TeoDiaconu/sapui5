@@ -28,22 +28,22 @@ sap.ui.define([
         //add button pressed to open fragment
         onAdd : function () {
             
-            var oView = this.getView();
+            var oView1 = this.getView();
 
 			// create dialog lazily
-			if (!this.pDialog) {
-				this.pDialog = Fragment.load({
-					id: oView.getId(),
+			if (!this.pDialog1) {
+				this.pDialog1 = Fragment.load({
+					id: oView1.getId(),
 					name: "org.ubb.books.view.AddDialog",
 					controller: this
-				}).then(function (oDialog) {
+				}).then(function (oDialog1) {
 					// connect dialog to the root view of this component (models, lifecycle)
-					oView.addDependent(oDialog);
-					return oDialog;
+					oView1.addDependent(oDialog1);
+					return oDialog1;
 				});
 			} 
-			this.pDialog.then(function(oDialog) {
-				oDialog.open();
+			this.pDialog1.then(function(oDialog1) {
+				oDialog1.open();
 			});
         },
 
@@ -155,22 +155,22 @@ sap.ui.define([
     
         onUpdate : function () {
 
-            var oView = this.getView();
+            var oView2 = this.getView();
 
 			// create dialog lazily
-			if (!this.pDialog) {
-				this.pDialog = Fragment.load({
-					id: oView.getId(),
+			if (!this.pDialog2) {
+				this.pDialog2 = Fragment.load({
+					id: oView2.getId(),
 					name: "org.ubb.books.view.UpdateDialog",
 					controller: this
-				}).then(function (oDialog) {
+				}).then(function (oDialog2) {
 					// connect dialog to the root view of this component (models, lifecycle)
-					oView.addDependent(oDialog);
-					return oDialog;
+					oView2.addDependent(oDialog2);
+					return oDialog2;
 				});
 			} 
-			this.pDialog.then(function(oDialog) {
-				oDialog.open();
+			this.pDialog2.then(function(oDialog2) {
+				oDialog2.open();
 			});
         },
 
