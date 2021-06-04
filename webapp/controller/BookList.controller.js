@@ -155,18 +155,10 @@ sap.ui.define([
 
 
         updateBookInDatabase(oEvent) { 
-            const selectedRow = this.byId("idBooksTable").getSelectedContexts();
-            
-            const sPathToBook = selectedRow[0].getPath();
-            console.log(sPathToBook.substring(8,18));
-
-            const isbnstring = sPathToBook.substring(8,18);
-            
-
             var bCreate = true;
 
             var objectBook = {
-				Isbn: sPathToBook.substring(8,18),
+				Isbn: "",
 				Author: "",
 				Title: "",
                 DatePublished: "",
@@ -180,18 +172,18 @@ sap.ui.define([
             var oControl = aItems[0].getFields()[0];
             
 
-            // //isbn
-			// oControl = aItems[0].getFields()[0];
-			// if (oControl.getValue().length !== 0) {
-			// 	objectBook.Author = oControl.getValue();
-			// 	oControl.setValueState("None");
-			// } else {
-			// 	bCreate = false;
-			// 	oControl.setValueState("Error");
-            // }   
+            //isbn
+			oControl = aItems[0].getFields()[0];
+			if (oControl.getValue().length !== 0) {
+				objectBook.Isbn = oControl.getValue();
+				oControl.setValueState("None");
+			} else {
+				bCreate = false;
+				oControl.setValueState("Error");
+            }   
 
             //author
-			oControl = aItems[0].getFields()[0];
+			oControl = aItems[1].getFields()[0];
 			if (oControl.getValue().length !== 0) {
 				objectBook.Author = oControl.getValue();
 				oControl.setValueState("None");
@@ -201,7 +193,7 @@ sap.ui.define([
             }
             
             //title
-			oControl = aItems[1].getFields()[0];
+			oControl = aItems[2].getFields()[0];
 			if (oControl.getValue().length !== 0) {
 				objectBook.Title = oControl.getValue();
 				oControl.setValueState("None");
@@ -211,7 +203,7 @@ sap.ui.define([
             }
             
             //datepublished
-			oControl = aItems[2].getFields()[0];
+			oControl = aItems[3].getFields()[0];
 			if (oControl.getValue().length !== 0) {
 				objectBook.DatePublished = oControl.getDateValue();
 				oControl.setValueState("None");
@@ -221,7 +213,7 @@ sap.ui.define([
             }
             
             //available of books
-			oControl = aItems[3].getFields()[0];
+			oControl = aItems[4].getFields()[0];
 			if (oControl.getValue().length !== 0) {
                 var i = parseInt(oControl.getValue());
 				objectBook.NumberOfAvailableBooks = i;
@@ -232,7 +224,7 @@ sap.ui.define([
             }
 
             //language
-			oControl = aItems[4].getFields()[0];
+			oControl = aItems[5].getFields()[0];
 			if (oControl.getValue().length !== 0) {
 				objectBook.Language = oControl.getValue();
 				oControl.setValueState("None");
@@ -242,7 +234,7 @@ sap.ui.define([
             }
             
             //number of books
-			oControl = aItems[5].getFields()[0];
+			oControl = aItems[6].getFields()[0];
 			if (oControl.getValue().length !== 0) {
                 var i = parseInt(oControl.getValue());
 				objectBook.TotalNumberOfBooks = i;
@@ -254,10 +246,9 @@ sap.ui.define([
             
             this.getView().getModel().setUseBatch(false);
             
-            this.getView().getModel().update("/Books(ISBN='"+isbnstring+"')", objectBook,{ 
+            this.getView().getModel().update("/Books(Isbn='"+objectBook.Isbn+"')", objectBook,{ 
                 success: () =>  {
                     MessageToast.show("Book Updated Successfully!");
-                    this.byId("updateDialog").close();
                 },
                 error: () => {
                     MessageToast.show("Error in updating book!");
@@ -266,27 +257,29 @@ sap.ui.define([
         },
         onShow : function () {
 
-            if (!this.openDialog) {
-                this.showBorrowedDialog = sap.ui.xmlfragment("org.ubb.books.view.BorrowedBooks", this);
-            }
+            var oView = this.getView();
 
-            this.getView().addDependent(this.showBorrowedDialog);
-            this.showBorrowedDialog.open();
+			// create dialog lazily
+			if (!this.pDialog) {
+				this.pDialog = Fragment.load({
+					id: oView.getId(),
+					name: "org.ubb.books.view.BorrowedBooks",
+					controller: this
+				}).then(function (oDialog) {
+					// connect dialog to the root view of this component (models, lifecycle)
+					oView.addDependent(oDialog);
+					return oDialog;
+				});
+			} 
+			this.pDialog.then(function(oDialog) {
+				oDialog.open();
+			});
 
         },
 
-        // closeBorrowedDialog: function () {
-        //     if (!this.showDialog) {
-        //         this.showDialog = sap.ui.xmlfragment("org.ubb.books.view.BorrowedBooks", this);
-        //     }
-        //     this.showDialog.destroy();
-        // },
+        closeBorrowedDialog: function () {
+            this.byId("openDialog").close();
+        },
 
-        // closeUpdateDialog: function () {
-        //     if (!this.updateDialog) {
-        //         this.updateDialog = sap.ui.xmlfragment("org.ubb.books.view.updateDialog", this);
-        //     }
-        //     this.updateDialog.destroy();
-        // }
     });
 });

@@ -11,14 +11,13 @@
       draggable = "true"
       resizable = "true">
 
-
         <f:SimpleForm id="updateBookForm" maxContainerCols="2" editable="true" layout="ResponsiveGridLayout" labelSpanL="2" labelSpanM="2"
 			emptySpanL="0" emptySpanM="0" columnsL="1" columnsM="1" class="editableForm sapUiSizeCompact">
 
 			<f:content>
 
-				<!-- <Label text="ISBN"/>
-				<Input id="isbn" placeholder="Enter ISBN" maxLength="13"/> -->
+				<Label text="ISBN"/>
+				<Input id="isbn" placeholder="Enter ISBN" maxLength="13"/>
 
                 <Label text="Author"/>
 				<Input id="uauthor" placeholder="Enter New Author"/>

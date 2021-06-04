@@ -5,12 +5,11 @@ xmlns:ui="sap.ui" xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core
 
 <Dialog id="openDialog" title="Borrowed Books">
     
-<Table id="idBooksTable"
+<Table id="idBooksTable2"
 		items="{
 			path: '/BorrowedBooks'
 		}"
 		growing="true"
-		mode="SingleSelectLeft"
 		growingThreshold="10">
 
 		<headerToolbar> 
@@ -18,7 +17,7 @@ xmlns:ui="sap.ui" xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core
 				<content>
 				<Button
 						id="cancelBorrowed"
-						text="cancel"
+						text="close"
 						press=".closeBorrowedDialog"
 						class="myAppDemoWT myCustomButton"
 						width="13%"
